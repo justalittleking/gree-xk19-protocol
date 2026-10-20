@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+
+# Captured bus data and local experiment output
+*.bin
+snap_*.bin
+bl_*.json
+buslog*.json
+mode*.json
+fn*.json
+xfan*.json
+pi_data_*.json
+pi_buslog_*.json
+*.tgz
+
+# Local credentials / deployment secrets
+askpass*.sh
+secrets.yaml

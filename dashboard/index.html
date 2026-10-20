@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Gree XK19 · Bus Monitor</title>
+  <meta name="description" content="Read-only monitor for a Gree XK19 / GRZ4E-B wired controller RS-485 bus.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230f766e'/%3E%3Cpath d='M32 14v36M14 32h36M20 20l24 24M44 20L20 44' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <script>
+    try {
+      const queryTheme = new URLSearchParams(location.search).get("theme");
+      const mode = queryTheme === "light" || queryTheme === "dark"
+        ? queryTheme
+        : (localStorage.getItem("gree-theme") || "auto");
+      const dark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = mode === "auto" ? (dark ? "dark" : "light") : mode;
+    } catch (_) {}
+  </script>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true">
+    <symbol id="i-snowflake" viewBox="0 0 24 24">
+      <path d="M12 2v20M4.2 6.5l15.6 11M19.8 6.5L4.2 17.5M9 3.8l3 2.2 3-2.2M9 20.2l3-2.2 3 2.2M3.7 10.7l3.2 1.1 1.1-3.2M20.3 13.3l-3.2-1.1-1.1 3.2M3.7 13.3l3.2-1.1 1.1 3.2M20.3 10.7l-3.2 1.1-1.1-3.2"/>
+    </symbol>
+    <symbol id="i-wind" viewBox="0 0 24 24">
+      <path d="M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h8a2.5 2.5 0 1 1-2.5 2.5"/>
+    </symbol>
+    <symbol id="i-activity" viewBox="0 0 24 24">
+      <path d="M3 12h4l2.2-7 4.2 14 2.2-7H21"/>
+    </symbol>
+    <symbol id="i-droplet" viewBox="0 0 24 24">
+      <path d="M12 3.5s6 6.1 6 11a6 6 0 1 1-12 0c0-4.9 6-11 6-11Z"/>
+      <path d="M9 15.2a3 3 0 0 0 3 3"/>
+    </symbol>
+    <symbol id="i-power" viewBox="0 0 24 24">
+      <path d="M12 3v9M6.3 6.3a8 8 0 1 0 11.4 0"/>
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+    </symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24">
+      <path d="M20.5 14.3A8.5 8.5 0 0 1 9.7 3.5 8.5 8.5 0 1 0 20.5 14.3Z"/>
+    </symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24">
+      <rect x="9" y="9" width="11" height="11" rx="2"/>
+      <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/>
+    </symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24">
+      <path d="M8 5v14M16 5v14"/>
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24">
+      <path d="m8 5 11 7-11 7V5Z"/>
+    </symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24">
+      <path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/>
+    </symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24">
+      <rect x="7" y="7" width="10" height="10" rx="2"/>
+      <path d="M9 2v5M15 2v5M9 17v5M15 17v5M2 9h5M2 15h5M17 9h5M17 15h5"/>
+    </symbol>
+  </svg>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">XK19</div>
+        <div class="brand-text">
+          <div class="brand-title">Gree XK19 <span class="variant">GRZ4E-B</span></div>
+          <div class="brand-sub">Wired controller bus · 1200 8N1 · read-only</div>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <div id="conn-badge" class="badge badge-muted">
+          <span class="status-dot"></span><span id="conn-text">Connecting</span>
+        </div>
+        <span class="badge badge-outline">Read-only</span>
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="切换主题" title="切换主题">
+          <svg class="icon"><use id="theme-icon" href="#i-moon"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <button class="tab is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-monitor" data-tab="monitor">Monitor</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="panel-lab" data-tab="lab">Lab</button>
+      <div class="tab-spacer"></div>
+      <div id="demo-bar" class="demo-bar" hidden>
+        <span class="badge badge-demo">demo</span>
+        <span id="demo-label" class="muted small">—</span>
+        <button id="demo-toggle" class="icon-btn small" type="button" aria-label="暂停回放" title="暂停回放">
+          <svg class="icon"><use id="demo-icon" href="#i-pause"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <main>
+      <section id="panel-monitor" class="panel" role="tabpanel">
+        <div id="empty" class="empty" hidden>
+          <div class="empty-icon"><svg class="icon"><use href="#i-activity"/></svg></div>
+          <h2 id="empty-title">等待总线数据</h2>
+          <p id="empty-message" class="muted">正在连接串口或加载 demo 数据。</p>
+          <button id="retry" class="btn btn-primary" type="button">重新连接</button>
+        </div>
+
+        <div id="monitor" class="monitor">
+          <div class="hero-grid">
+            <article class="card hero">
+              <div class="eyebrow">Setpoint</div>
+              <div class="hero-row">
+                <div class="hero-value">
+                  <span id="setpoint-value">—</span><span class="hero-unit">°C</span>
+                </div>
+                <div class="hero-meta">
+                  <span id="hero-mode" class="badge badge-muted">—</span>
+                  <span id="hero-fan" class="badge badge-muted">—</span>
+                </div>
+              </div>
+              <p class="hero-note">Target temperature reported by the wired controller. Room temperature is not decoded.</p>
+              <div class="range" aria-hidden="true">
+                <div class="range-track">
+                  <div id="range-fill" class="range-fill"></div>
+                  <span id="range-marker" class="range-marker"></span>
+                </div>
+                <div class="range-labels"><span>16°C</span><span>30°C</span></div>
+              </div>
+            </article>
+
+            <div class="tiles">
+              <article class="card tile" data-tone="teal">
+                <div class="tile-icon"><svg class="icon"><use href="#i-snowflake"/></svg></div>
+                <div class="tile-label">Mode</div>
+                <div id="tile-mode" class="tile-value">—</div>
+                <div class="tile-hint">STATUS +5 / +9</div>
+              </article>
+              <article class="card tile" data-tone="blue">
+                <div class="tile-icon"><svg class="icon"><use href="#i-wind"/></svg></div>
+                <div class="tile-label">Fan</div>
+                <div id="tile-fan" class="tile-value">—</div>
+                <div class="tile-hint">Actual indoor fan level</div>
+              </article>
+              <article class="card tile" data-tone="green">
+                <div class="tile-icon"><svg class="icon"><use href="#i-activity"/></svg></div>
+                <div class="tile-label">Run state</div>
+                <div id="tile-run" class="tile-value">—</div>
+                <div class="tile-hint">STATUS +7 · experimental</div>
+              </article>
+              <article class="card tile" data-tone="amber">
+                <div class="tile-icon"><svg class="icon"><use href="#i-droplet"/></svg></div>
+                <div class="tile-label">X-FAN</div>
+                <div id="tile-xfan" class="tile-value">—</div>
+                <div id="tile-xfan-hint" class="tile-hint">Setting not readable</div>
+              </article>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <article class="card">
+              <div class="card-head"><h2>Connection</h2><span id="device-age" class="muted small">—</span></div>
+              <dl class="stats">
+                <div><dt>Port</dt><dd id="stat-port">—</dd></div>
+                <div><dt>Bus</dt><dd>1200 8N1</dd></div>
+                <div><dt>Frames</dt><dd id="stat-frames">—</dd></div>
+                <div><dt>Last frame</dt><dd id="stat-last">—</dd></div>
+                <div><dt>Source</dt><dd id="stat-source">—</dd></div>
+              </dl>
+            </article>
+            <article class="card">
+              <div class="card-head"><h2>Change log</h2></div>
+              <ol id="timeline" class="timeline">
+                <li class="timeline-empty">Waiting for data…</li>
+              </ol>
+            </article>
+          </div>
+
+          <article class="card">
+            <div class="card-head"><h2>Status frame</h2><span class="badge badge-outline">12 bytes</span></div>
+            <div id="byte-strip" class="byte-strip"></div>
+            <p class="muted small">Find <code>20 20 00 + BA AA CE 3E</code>, read 12 bytes, verify <code>7E F9</code>. Prefix bytes vary and are ignored.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="panel-lab" class="panel" role="tabpanel" hidden>
+        <div class="lab-grid">
+          <article class="card">
+            <div class="card-head">
+              <h2>Last frames</h2>
+              <button id="copy-status" class="btn btn-ghost small" type="button">
+                <svg class="icon icon-sm"><use href="#i-copy"/></svg> Copy
+              </button>
+            </div>
+            <div class="raw-block">
+              <div class="raw-label">STATUS</div>
+              <code id="raw-status">—</code>
+            </div>
+            <div class="raw-block">
+              <div class="raw-label">E9</div>
+              <code id="raw-e9">—</code>
+            </div>
+            <p class="muted small">X-FAN setting is not readable from the periodic status frames. The dashboard only shows whether drying is currently running.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h2>Fields</h2><span class="badge badge-outline">confidence</span></div>
+            <table class="table compact">
+              <thead><tr><th>Field</th><th>Offset</th><th>Now</th><th>Confidence</th></tr></thead>
+              <tbody>
+                <tr><td>Setpoint</td><td><code>+6</code></td><td id="dec-temp">—</td><td><span class="badge badge-ok">high</span></td></tr>
+                <tr><td>Mode</td><td><code>+5</code> + <code>+9</code></td><td id="dec-mode">—</td><td><span class="badge badge-warn">medium</span></td></tr>
+                <tr><td>Fan level</td><td><code>+8</code></td><td id="dec-fan">—</td><td><span class="badge badge-warn">medium</span></td></tr>
+                <tr><td>Run state</td><td><code>+7</code></td><td id="dec-run">—</td><td><span class="badge badge-warn">low</span></td></tr>
+                <tr><td>X-FAN drying</td><td><code>0xEE</code> frame</td><td id="dec-xfan">—</td><td><span class="badge badge-warn">low</span></td></tr>
+                <tr><td>Room temperature</td><td>—</td><td id="dec-room">not decoded</td><td><span class="badge badge-muted">unknown</span></td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+
+        <article class="card">
+          <div class="card-head">
+            <h2>Frame log</h2>
+            <div class="toolbar">
+              <select id="frame-filter" class="select" aria-label="Filter frames">
+                <option value="all">All</option>
+                <option value="status">STATUS</option>
+                <option value="e9">E9</option>
+                <option value="other">Other</option>
+              </select>
+              <button id="frame-pause" class="btn btn-ghost small" type="button">Pause</button>
+              <button id="frame-clear" class="btn btn-ghost small" type="button">Clear</button>
+            </div>
+          </div>
+          <div class="table-wrap" id="frame-wrap">
+            <table class="table frames">
+              <thead><tr><th>Time</th><th>Type</th><th>Len</th><th>Hex</th></tr></thead>
+              <tbody id="frame-body">
+                <tr><td colspan="4" class="empty-cell">Waiting for frames…</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-foot">
+            <span id="frame-count" class="muted small">0 frames</span>
+            <span class="muted small">Showing latest 200</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><h2>Recordings</h2><span class="badge badge-outline">live only</span></div>
+          <p class="muted small">Press a physical panel button, then record a 15-second window. The diff is compared with the previous snapshot.</p>
+          <div id="ops" class="ops"></div>
+          <div id="op-status" class="muted small" role="status"></div>
+          <div id="results" class="results"></div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Read-only monitor. No writes to the bus.</span>
+      <span>Gree XK19 / GRZ4E-B · FE-BA variant · not affiliated with Gree</span>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

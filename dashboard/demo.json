@@ -1,0 +1,646 @@
+{
+  "recorded_at": "2026-10-18 21:52–22:06 +08:00",
+  "note": "Replay of status/E9 frames captured from a Gree XK19 / GRZ4E-B bus. The timeline is assembled from observed snapshots for UI demonstration.",
+  "timeline": [
+    {
+      "label": "制冷 26°C · 1 档",
+      "at": "21:57:21",
+      "data": {
+        "port": "/dev/ttyUSB0",
+        "baud": 1200,
+        "total_bytes": 32,
+        "frame_count": 3,
+        "last_update": 1792331800.8,
+        "now": 1792331801.0,
+        "status": {
+          "setpoint": 26,
+          "b1": 242,
+          "ts": 1792331800.1,
+          "raw": "0600202000baaace3ef2749606fabe7ef9",
+          "sbytes": [
+            186,
+            170,
+            206,
+            62,
+            242,
+            116,
+            150,
+            6,
+            250,
+            190,
+            126,
+            249
+          ],
+          "mode": "制冷",
+          "power": "运行(制冷)",
+          "power_byte": 6
+        },
+        "fanmode": {
+          "mode": "实际1档",
+          "ts": 1792331800.7
+        },
+        "cmdfan": {
+          "ts": 1792331800.7,
+          "level": "实际1档",
+          "raw": "—",
+          "last_level": "实际1档",
+          "last_ts": 1792331800.7,
+          "fresh": false
+        },
+        "blow": {
+          "on": false,
+          "byte": 4,
+          "val_on": 4,
+          "val_off": 252,
+          "ts": 1792331800.7,
+          "state": "待机(未吹风)",
+          "xfan_byte": 254,
+          "xfan_ts": 1792331800.7
+        },
+        "e9": {
+          "b5": 4,
+          "b6": 30,
+          "ts": 1792331800.7,
+          "raw": "030602e9a6ce3ef2041efeee",
+          "run": null
+        },
+        "f6fa": {
+          "b2": null,
+          "ts": 0,
+          "raw": "—"
+        },
+        "frames": [
+          {
+            "ts": 1792331800.1,
+            "hex": "06 00 20 20 00 BA AA CE 3E F2 74 96 06 FA BE 7E F9",
+            "ascii": "..  ....>.t....~.",
+            "tag": "STATUS",
+            "len": 17
+          },
+          {
+            "ts": 1792331800.7,
+            "hex": "03 06 02 E9 A6 CE 3E F2 04 1E FE EE",
+            "ascii": "......>.....",
+            "tag": "E9",
+            "len": 12
+          },
+          {
+            "ts": 1792331800.8,
+            "hex": "EE FE DE",
+            "ascii": "...",
+            "tag": "OTHER",
+            "len": 3
+          }
+        ]
+      }
+    },
+    {
+      "label": "升温到 27°C",
+      "at": "21:52:02",
+      "data": {
+        "port": "/dev/ttyUSB0",
+        "baud": 1200,
+        "total_bytes": 32,
+        "frame_count": 3,
+        "last_update": 1792331810.8,
+        "now": 1792331811.0,
+        "status": {
+          "setpoint": 27,
+          "b1": 242,
+          "ts": 1792331810.1,
+          "raw": "0600202000baaace3ef2749206fabe7ef9",
+          "sbytes": [
+            186,
+            170,
+            206,
+            62,
+            242,
+            116,
+            146,
+            6,
+            250,
+            190,
+            126,
+            249
+          ],
+          "mode": "制冷",
+          "power": "运行(制冷)",
+          "power_byte": 6
+        },
+        "fanmode": {
+          "mode": "实际1档",
+          "ts": 1792331810.7
+        },
+        "cmdfan": {
+          "ts": 1792331810.7,
+          "level": "实际1档",
+          "raw": "—",
+          "last_level": "实际1档",
+          "last_ts": 1792331810.7,
+          "fresh": false
+        },
+        "blow": {
+          "on": false,
+          "byte": 4,
+          "val_on": 4,
+          "val_off": 252,
+          "ts": 1792331810.7,
+          "state": "待机(未吹风)",
+          "xfan_byte": 254,
+          "xfan_ts": 1792331810.7
+        },
+        "e9": {
+          "b5": 4,
+          "b6": 34,
+          "ts": 1792331810.7,
+          "raw": "030602e9a6ce3ef20422feee",
+          "run": null
+        },
+        "f6fa": {
+          "b2": null,
+          "ts": 0,
+          "raw": "—"
+        },
+        "frames": [
+          {
+            "ts": 1792331810.1,
+            "hex": "06 00 20 20 00 BA AA CE 3E F2 74 92 06 FA BE 7E F9",
+            "ascii": "..  ....>.t....~.",
+            "tag": "STATUS",
+            "len": 17
+          },
+          {
+            "ts": 1792331810.7,
+            "hex": "03 06 02 E9 A6 CE 3E F2 04 22 FE EE",
+            "ascii": "......>..\"..",
+            "tag": "E9",
+            "len": 12
+          },
+          {
+            "ts": 1792331810.8,
+            "hex": "EE FE DE",
+            "ascii": "...",
+            "tag": "OTHER",
+            "len": 3
+          }
+        ]
+      }
+    },
+    {
+      "label": "抽湿 25°C · 1 档",
+      "at": "21:53:14",
+      "data": {
+        "port": "/dev/ttyUSB0",
+        "baud": 1200,
+        "total_bytes": 32,
+        "frame_count": 3,
+        "last_update": 1792331820.8,
+        "now": 1792331821.0,
+        "status": {
+          "setpoint": 25,
+          "b1": 242,
+          "ts": 1792331820.1,
+          "raw": "0600202000baaace3ef26c9a06fabe7ef9",
+          "sbytes": [
+            186,
+            170,
+            206,
+            62,
+            242,
+            108,
+            154,
+            6,
+            250,
+            190,
+            126,
+            249
+          ],
+          "mode": "抽湿",
+          "power": "运行(制冷)",
+          "power_byte": 6
+        },
+        "fanmode": {
+          "mode": "实际1档",
+          "ts": 1792331820.7
+        },
+        "cmdfan": {
+          "ts": 1792331820.7,
+          "level": "实际1档",
+          "raw": "—",
+          "last_level": "实际1档",
+          "last_ts": 1792331820.7,
+          "fresh": false
+        },
+        "blow": {
+          "on": false,
+          "byte": 4,
+          "val_on": 4,
+          "val_off": 252,
+          "ts": 1792331820.7,
+          "state": "待机(未吹风)",
+          "xfan_byte": 254,
+          "xfan_ts": 1792331820.7
+        },
+        "e9": {
+          "b5": 4,
+          "b6": 30,
+          "ts": 1792331820.7,
+          "raw": "030602e9a6ce3ef2041efeee",
+          "run": null
+        },
+        "f6fa": {
+          "b2": null,
+          "ts": 0,
+          "raw": "—"
+        },
+        "frames": [
+          {
+            "ts": 1792331820.1,
+            "hex": "06 00 20 20 00 BA AA CE 3E F2 6C 9A 06 FA BE 7E F9",
+            "ascii": "..  ....>.l....~.",
+            "tag": "STATUS",
+            "len": 17
+          },
+          {
+            "ts": 1792331820.7,
+            "hex": "03 06 02 E9 A6 CE 3E F2 04 1E FE EE",
+            "ascii": "......>.....",
+            "tag": "E9",
+            "len": 12
+          },
+          {
+            "ts": 1792331820.8,
+            "hex": "EE FE DE",
+            "ascii": "...",
+            "tag": "OTHER",
+            "len": 3
+          }
+        ]
+      }
+    },
+    {
+      "label": "送风 25°C · 2 档",
+      "at": "21:54:45",
+      "data": {
+        "port": "/dev/ttyUSB0",
+        "baud": 1200,
+        "total_bytes": 32,
+        "frame_count": 3,
+        "last_update": 1792331830.8,
+        "now": 1792331831.0,
+        "status": {
+          "setpoint": 25,
+          "b1": 242,
+          "ts": 1792331830.1,
+          "raw": "0600202000baaace3ef2649a06f6be7ef9",
+          "sbytes": [
+            186,
+            170,
+            206,
+            62,
+            242,
+            100,
+            154,
+            6,
+            246,
+            190,
+            126,
+            249
+          ],
+          "mode": "送风",
+          "power": "运行(制冷)",
+          "power_byte": 6
+        },
+        "fanmode": {
+          "mode": "实际2档",
+          "ts": 1792331830.7
+        },
+        "cmdfan": {
+          "ts": 1792331830.7,
+          "level": "实际2档",
+          "raw": "—",
+          "last_level": "实际2档",
+          "last_ts": 1792331830.7,
+          "fresh": false
+        },
+        "blow": {
+          "on": false,
+          "byte": 4,
+          "val_on": 4,
+          "val_off": 252,
+          "ts": 1792331830.7,
+          "state": "待机(未吹风)",
+          "xfan_byte": 254,
+          "xfan_ts": 1792331830.7
+        },
+        "e9": {
+          "b5": 4,
+          "b6": 30,
+          "ts": 1792331830.7,
+          "raw": "030602e9a6ce3ef2041efeee",
+          "run": null
+        },
+        "f6fa": {
+          "b2": null,
+          "ts": 0,
+          "raw": "—"
+        },
+        "frames": [
+          {
+            "ts": 1792331830.1,
+            "hex": "06 00 20 20 00 BA AA CE 3E F2 64 9A 06 F6 BE 7E F9",
+            "ascii": "..  ....>.d....~.",
+            "tag": "STATUS",
+            "len": 17
+          },
+          {
+            "ts": 1792331830.7,
+            "hex": "03 06 02 E9 A6 CE 3E F2 04 1E FE EE",
+            "ascii": "......>.....",
+            "tag": "E9",
+            "len": 12
+          },
+          {
+            "ts": 1792331830.8,
+            "hex": "EE FE DE",
+            "ascii": "...",
+            "tag": "OTHER",
+            "len": 3
+          }
+        ]
+      }
+    },
+    {
+      "label": "回到制冷 26°C · 1 档",
+      "at": "21:57:21",
+      "data": {
+        "port": "/dev/ttyUSB0",
+        "baud": 1200,
+        "total_bytes": 32,
+        "frame_count": 3,
+        "last_update": 1792331840.8,
+        "now": 1792331841.0,
+        "status": {
+          "setpoint": 26,
+          "b1": 242,
+          "ts": 1792331840.1,
+          "raw": "0600202000baaace3ef2749606fabe7ef9",
+          "sbytes": [
+            186,
+            170,
+            206,
+            62,
+            242,
+            116,
+            150,
+            6,
+            250,
+            190,
+            126,
+            249
+          ],
+          "mode": "制冷",
+          "power": "运行(制冷)",
+          "power_byte": 6
+        },
+        "fanmode": {
+          "mode": "实际1档",
+          "ts": 1792331840.7
+        },
+        "cmdfan": {
+          "ts": 1792331840.7,
+          "level": "实际1档",
+          "raw": "—",
+          "last_level": "实际1档",
+          "last_ts": 1792331840.7,
+          "fresh": false
+        },
+        "blow": {
+          "on": false,
+          "byte": 4,
+          "val_on": 4,
+          "val_off": 252,
+          "ts": 1792331840.7,
+          "state": "待机(未吹风)",
+          "xfan_byte": 254,
+          "xfan_ts": 1792331840.7
+        },
+        "e9": {
+          "b5": 4,
+          "b6": 30,
+          "ts": 1792331840.7,
+          "raw": "030602e9a6ce3ef2041efeee",
+          "run": null
+        },
+        "f6fa": {
+          "b2": null,
+          "ts": 0,
+          "raw": "—"
+        },
+        "frames": [
+          {
+            "ts": 1792331840.1,
+            "hex": "06 00 20 20 00 BA AA CE 3E F2 74 96 06 FA BE 7E F9",
+            "ascii": "..  ....>.t....~.",
+            "tag": "STATUS",
+            "len": 17
+          },
+          {
+            "ts": 1792331840.7,
+            "hex": "03 06 02 E9 A6 CE 3E F2 04 1E FE EE",
+            "ascii": "......>.....",
+            "tag": "E9",
+            "len": 12
+          },
+          {
+            "ts": 1792331840.8,
+            "hex": "EE FE DE",
+            "ascii": "...",
+            "tag": "OTHER",
+            "len": 3
+          }
+        ]
+      }
+    },
+    {
+      "label": "关机待机 27°C",
+      "at": "22:00:00",
+      "data": {
+        "port": "/dev/ttyUSB0",
+        "baud": 1200,
+        "total_bytes": 32,
+        "frame_count": 3,
+        "last_update": 1792331850.8,
+        "now": 1792331851.0,
+        "status": {
+          "setpoint": 27,
+          "b1": 242,
+          "ts": 1792331850.1,
+          "raw": "0600202000baaace3ef2f492eeecbe7ef9",
+          "sbytes": [
+            186,
+            170,
+            206,
+            62,
+            242,
+            244,
+            146,
+            238,
+            236,
+            190,
+            126,
+            249
+          ],
+          "mode": "关机",
+          "power": "待机/关机",
+          "power_byte": 238
+        },
+        "fanmode": {
+          "mode": "未运行",
+          "ts": 1792331850.7
+        },
+        "cmdfan": {
+          "ts": 1792331850.7,
+          "level": "未运行",
+          "raw": "—",
+          "last_level": "未运行",
+          "last_ts": 1792331850.7,
+          "fresh": false
+        },
+        "blow": {
+          "on": false,
+          "byte": 244,
+          "val_on": 4,
+          "val_off": 252,
+          "ts": 1792331850.7,
+          "state": "待机(未运行)",
+          "xfan_byte": 254,
+          "xfan_ts": 1792331850.7
+        },
+        "e9": {
+          "b5": 244,
+          "b6": 12,
+          "ts": 1792331850.7,
+          "raw": "030602e9a6ce3ef2f40cfeee",
+          "run": null
+        },
+        "f6fa": {
+          "b2": null,
+          "ts": 0,
+          "raw": "—"
+        },
+        "frames": [
+          {
+            "ts": 1792331850.1,
+            "hex": "06 00 20 20 00 BA AA CE 3E F2 F4 92 EE EC BE 7E F9",
+            "ascii": "..  ....>......~.",
+            "tag": "STATUS",
+            "len": 17
+          },
+          {
+            "ts": 1792331850.7,
+            "hex": "03 06 02 E9 A6 CE 3E F2 F4 0C FE EE",
+            "ascii": "......>.....",
+            "tag": "E9",
+            "len": 12
+          },
+          {
+            "ts": 1792331850.8,
+            "hex": "EE FE DE",
+            "ascii": "...",
+            "tag": "OTHER",
+            "len": 3
+          }
+        ]
+      }
+    }
+  ],
+  "current": {
+    "port": "/dev/ttyUSB0",
+    "baud": 1200,
+    "total_bytes": 32,
+    "frame_count": 3,
+    "last_update": 1792331860.8,
+    "now": 1792331861.0,
+    "status": {
+      "setpoint": 25,
+      "b1": 242,
+      "ts": 1792331860.1,
+      "raw": "0600202000baaace3ef2749a0afabe7ef9",
+      "sbytes": [
+        186,
+        170,
+        206,
+        62,
+        242,
+        116,
+        154,
+        10,
+        250,
+        190,
+        126,
+        249
+      ],
+      "mode": "制冷",
+      "power": "运行(制冷)",
+      "power_byte": 10
+    },
+    "fanmode": {
+      "mode": "实际1档",
+      "ts": 1792331860.7
+    },
+    "cmdfan": {
+      "ts": 1792331860.7,
+      "level": "实际1档",
+      "raw": "—",
+      "last_level": "实际1档",
+      "last_ts": 1792331860.7,
+      "fresh": false
+    },
+    "blow": {
+      "on": false,
+      "byte": 12,
+      "val_on": 4,
+      "val_off": 252,
+      "ts": 1792331860.7,
+      "state": "待机(未吹风)",
+      "xfan_byte": 254,
+      "xfan_ts": 1792331860.7
+    },
+    "e9": {
+      "b5": 12,
+      "b6": 90,
+      "ts": 1792331860.7,
+      "raw": "030602e9a6ce3ef20c5afeee",
+      "run": null
+    },
+    "f6fa": {
+      "b2": null,
+      "ts": 0,
+      "raw": "—"
+    },
+    "frames": [
+      {
+        "ts": 1792331860.1,
+        "hex": "06 00 20 20 00 BA AA CE 3E F2 74 9A 0A FA BE 7E F9",
+        "ascii": "..  ....>.t....~.",
+        "tag": "STATUS",
+        "len": 17
+      },
+      {
+        "ts": 1792331860.7,
+        "hex": "03 06 02 E9 A6 CE 3E F2 0C 5A FE EE",
+        "ascii": "......>..Z..",
+        "tag": "E9",
+        "len": 12
+      },
+      {
+        "ts": 1792331860.8,
+        "hex": "EE FE DE",
+        "ascii": "...",
+        "tag": "OTHER",
+        "len": 3
+      }
+    ]
+  }
+}
