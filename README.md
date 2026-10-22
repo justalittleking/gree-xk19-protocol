@@ -1,7 +1,5 @@
 # Gree XK19 Protocol
 
-**GRZ4E-B (2009) · XK19 wired controller · FE/BA variant · RS-485 1200 8N1 · read-only**
-
 ![status: read-only](https://img.shields.io/badge/status-read--only-0f766e)
 ![protocol: partial](https://img.shields.io/badge/protocol-partial-d97706)
 ![board: GRZ4E-B](https://img.shields.io/badge/board-GRZ4E--B-1f5f8b)
